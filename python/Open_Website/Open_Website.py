@@ -41,13 +41,18 @@ def Check_Type(time, website):
 
     web = re.compile(r'^(?:http|ftp)s?://')
 
-    time_type = tim.search(time)
+    time_type = tim.match(time)
 
-    web_type = web.search(website)
+    web_type = web.match(website)
 
-    print(time_type.group(), web_type.group())
+    if time_type and web_type:
 
-    print(re.match(r'http', website), re.match(tim, time))
+        return True
+
+    else:
+
+        return False
+
 
 def Open_Website():
 
@@ -55,19 +60,17 @@ def Open_Website():
 
     time = opentime.get()
 
-    # Check_Type(time, web)
-
     if web == '' or time == '':
 
         messagebox.showinfo('输入错误', '请输入正确的网址和时间！')
 
         return
 
-    # elif Check_Type(time, web) == False:
+    elif Check_Type(time, web) == False:
 
-        # messagebox.showinfo('格式错误', '请输入正确的网址和时间格式\n注意时间间隔为英文状态下的冒号！')
+        messagebox.showinfo('格式错误', '请输入正确的网址和时间格式\n注意时间间隔为英文状态下的冒号！')
 
-        # return
+        return
 
     else:
 
